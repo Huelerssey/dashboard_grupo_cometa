@@ -1,11 +1,8 @@
 import pandas as pd
 import streamlit as st
-import altair as alt
 from streamlit_extras.colored_header import colored_header
 from streamlit_extras.metric_cards import style_metric_cards
-import matplotlib.pyplot as plt
 import plotly.express as px
-import seaborn as sns
 from datetime import timedelta
 
 
@@ -144,7 +141,7 @@ coluna1, coluna2, coluna3 = st.columns(3)
 
 # cores dos cards
 style_metric_cards(
-    background_color='#FFFFFF',
+    background_color='#EEEEEE',
     border_color='#0D98E2',
     border_left_color='#0D98E2'
 )
@@ -173,6 +170,9 @@ with st.container():
     # Ajustando o tamanho do gráfico
     fig.update_layout(width=800, height=500)
 
+    # altera a cor de fundo do gráfico
+    fig.update_layout(paper_bgcolor='#EEEEEE', plot_bgcolor='#EEEEEE')
+
     #mostra o gráfico
     colu1.plotly_chart(fig)
 
@@ -192,6 +192,9 @@ with st.container():
     # Ajustando o tamanho do gráfico
     fig.update_layout(width=800, height=500)
 
+    # altera as cores de fundo
+    fig.update_layout(paper_bgcolor='#EEEEEE', plot_bgcolor='#EEEEEE')
+
     # mostra o gráfico
     colu2.plotly_chart(fig)
 
@@ -205,6 +208,9 @@ with st.container():
 
     # Ajustando o tamanho do gráfico
     fig.update_layout(width=1700, height=500)
+
+    # altera as cores de fundo
+    fig.update_layout(paper_bgcolor='#EEEEEE', plot_bgcolor='#EEEEEE')
 
     # Exibe o gráfico no Streamlit
     st.plotly_chart(fig)
