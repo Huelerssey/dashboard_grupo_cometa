@@ -10,3 +10,11 @@ footer {
 header {
     visibility: hidden;
 }
+
+.css-9uxsmk {
+    color: black;
+}
+
+.css-9uxsmk:hover {
+    color: blue;
+}

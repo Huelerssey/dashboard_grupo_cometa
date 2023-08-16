@@ -37,6 +37,7 @@ intervalo_datas = st.session_state.get('intervalo_datas', default_intervalo_data
 produtos_selecionados = st.session_state.get('produtos_selecionados', default_produtos)
 
 with st.sidebar:
+
     # logo do site
     st.image("imagens/xpto.png")
 
@@ -47,7 +48,7 @@ with st.sidebar:
     # Filtro de produtos
     produtos_selecionados = st.sidebar.multiselect('Selecione os produtos:', default_produtos, default=produtos_selecionados) # Use produtos_selecionados como default
     st.session_state.produtos_selecionados = produtos_selecionados
-
+        
     # Botão para redefinir filtros
     if st.button('Redefinir Filtros'):
         st.session_state.intervalo_datas = default_intervalo_datas
@@ -164,7 +165,7 @@ st.markdown("<h1 style='text-align: center;'> XPTO Dashboard Market Performance 
 colored_header(
 label="",
 description="",
-color_name="light-blue-70"
+color_name="blue-40"
 )
 
 #cria 3 colunas
@@ -172,9 +173,9 @@ coluna1, coluna2, coluna3 = st.columns(3)
 
 # cores dos cards
 style_metric_cards(
-    background_color='#EEEEEE',
-    border_color='#0D98E2',
-    border_left_color='#0D98E2'
+    background_color='#f5f2f2',
+    border_color='#83C9FF',
+    border_left_color='#83C9FF'
 )
 
 with st.container():
@@ -196,13 +197,13 @@ with st.container():
 
     # Questão 3: Top 10 Clientes por Faturamento
     colu1.subheader("Top 10 Clientes por Faturamento")
-    fig = px.bar(top_10_ranking, x='NOME CLIENTE', y='faturamento_total')
+    fig = px.bar(top_10_ranking, x='NOME CLIENTE', y='faturamento_total', color_discrete_sequence=['#83C9FF'])
 
     # Ajustando o tamanho do gráfico
     fig.update_layout(width=680, height=500)
 
     # altera a cor de fundo do gráfico
-    fig.update_layout(paper_bgcolor='#EEEEEE', plot_bgcolor='#EEEEEE')
+    fig.update_layout(paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
 
     #mostra o gráfico
     colu1.plotly_chart(fig)
@@ -215,7 +216,7 @@ with st.container():
     status_df.columns = ['Status', 'Count']
 
     # Criando o gráfico de pizza com Plotly
-    fig = px.pie(status_df, values='Count', names='Status')
+    fig = px.pie(status_df, values='Count', names='Status', color_discrete_sequence=['#83C9FF', '#f76a6f', '#83f398'])
 
     # Ajustando o tamanho das legendas
     fig.update_layout(legend_font=dict(size=20))
@@ -224,7 +225,7 @@ with st.container():
     fig.update_layout(width=690, height=500)
 
     # altera as cores de fundo
-    fig.update_layout(paper_bgcolor='#EEEEEE', plot_bgcolor='#EEEEEE')
+    fig.update_layout(paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
 
     # mostra o gráfico
     colu2.plotly_chart(fig)
@@ -235,13 +236,13 @@ with st.container():
     st.subheader("Taxa de Retenção por Ano")
 
     # Criando o gráfico de linhas com Plotly Express
-    fig = px.line(retencao_df, x='Ano', y='Taxa de Retenção (%)', line_dash_sequence=['solid'], line_shape='linear', markers=True)
+    fig = px.line(retencao_df, x='Ano', y='Taxa de Retenção (%)', line_dash_sequence=['solid'], line_shape='linear', markers=True, color_discrete_sequence=['#83C9FF'])
 
     # Ajustando o tamanho do gráfico
     fig.update_layout(width=1395, height=500)
 
     # altera as cores de fundo
-    fig.update_layout(paper_bgcolor='#EEEEEE', plot_bgcolor='#EEEEEE')
+    fig.update_layout(paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
 
     # Exibe o gráfico no Streamlit
     st.plotly_chart(fig)
@@ -250,11 +251,11 @@ with st.container():
 colored_header(
 label="",
 description="",
-color_name="light-blue-70"
+color_name="blue-40"
 )
 
-#footer
+# #footer
 with st.container():
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([2,1,2])
     
     col2.write("Developed By: [@Huelerssey](https://huelerssey-portfolio.website)")
