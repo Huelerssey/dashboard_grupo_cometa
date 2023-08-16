@@ -154,22 +154,24 @@ else:
 
     ## QUESTÃO 5 ##
     # Extraindo o ano da data de venda
-    data_filtrada['ANO VENDA'] = data_filtrada['DATA VENDA'].dt.year
+    data_sorted['YEAR'] = data_sorted['DATA VENDA'].dt.year
 
     # Calculando o número de clientes únicos por ano
-    clientes_por_ano = data_filtrada.groupby('ANO VENDA')['COD CLIENTE'].nunique()
+    clients_per_year = data_sorted.groupby('YEAR')['COD CLIENTE'].nunique()
 
-    # Calculando o número de clientes recorrentes por ano (com mais de uma compra no ano)
-    clientes_recorrentes_por_ano = data_filtrada[data_filtrada.duplicated(subset=['ANO VENDA', 'COD CLIENTE'], keep=False)].groupby('ANO VENDA')['COD CLIENTE'].nunique()
+    # Calculando a taxa de retenção como a proporção de clientes que continuam no ano seguinte
+    retention_rate = clients_per_year.pct_change() + 1
 
-    # Calculando a taxa de retenção por ano
-    taxa_retencao_por_ano = (clientes_recorrentes_por_ano / clientes_por_ano * 100).fillna(0)
+    # Como a retenção é medida em relação ao ano anterior, o primeiro ano terá um valor NaN
+    retention_rate = retention_rate.dropna()
 
-    # Criando um DataFrame com os anos e as taxas de retenção
-    retencao_df = pd.DataFrame({
-        'Ano': taxa_retencao_por_ano.index,
-        'Taxa de Retenção (%)': taxa_retencao_por_ano.values
+    # Criando um DataFrame para a taxa de retenção calculada
+    retencao_df_alternative = pd.DataFrame({
+        'Ano': retention_rate.index,
+        'Taxa de Retenção (%)': retention_rate.values * 100
     })
+
+    retencao_df_alternative['Taxa de Retenção (%)'] = retencao_df_alternative['Taxa de Retenção (%)'].map(lambda x: f"{x:.1f}")
 
     ##                              DASHBOARD                               ##
 
@@ -249,13 +251,13 @@ else:
         # Questão 5: Taxa de Retenção por Ano
         st.subheader("Taxa de Retenção por Ano")
 
-        # Criando o gráfico de linhas com Plotly Express
-        fig = px.line(retencao_df, x='Ano', y='Taxa de Retenção (%)', line_dash_sequence=['solid'], line_shape='linear', markers=True, color_discrete_sequence=['#83C9FF'])
+        # Criando o gráfico de linhas
+        fig = px.line(retencao_df_alternative, x='Ano', y='Taxa de Retenção (%)', line_dash_sequence=['solid'], line_shape='linear', markers=True, color_discrete_sequence=['#83C9FF'])
 
         # Ajustando o tamanho do gráfico
         fig.update_layout(width=1395, height=500)
 
-        # altera as cores de fundo
+        # Alterando as cores de fundo
         fig.update_layout(paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
 
         # Exibe o gráfico no Streamlit
