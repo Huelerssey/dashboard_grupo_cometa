@@ -215,14 +215,11 @@ else:
         colu1.subheader("Top 10 Clientes por Faturamento")
         fig = px.bar(top_10_ranking, x='NOME CLIENTE', y='faturamento_total', color_discrete_sequence=['#83C9FF'])
 
-        # Ajustando o tamanho do gráfico
-        fig.update_layout(width=680, height=500)
-
         # altera a cor de fundo do gráfico
-        fig.update_layout(paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
+        fig.update_layout(autosize=True, paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
 
         #mostra o gráfico
-        colu1.plotly_chart(fig)
+        colu1.plotly_chart(fig, use_container_width=True)
 
         # Questão 4: Distribuição de Clientes
         colu2.subheader("Distribuição de Clientes: Novos, Perdidos e Recorrentes")
@@ -237,14 +234,11 @@ else:
         # Ajustando o tamanho das legendas
         fig.update_layout(legend_font=dict(size=20))
 
-        # Ajustando o tamanho do gráfico
-        fig.update_layout(width=690, height=500)
-
         # altera as cores de fundo
-        fig.update_layout(paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
+        fig.update_layout(autosize=True, paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
 
         # mostra o gráfico
-        colu2.plotly_chart(fig)
+        colu2.plotly_chart(fig, use_container_width=True)
 
     with st.container():
 
@@ -254,14 +248,11 @@ else:
         # Criando o gráfico de linhas
         fig = px.line(retencao_df_alternative, x='Ano', y='Taxa de Retenção (%)', line_dash_sequence=['solid'], line_shape='linear', markers=True, color_discrete_sequence=['#83C9FF'])
 
-        # Ajustando o tamanho do gráfico
-        fig.update_layout(width=1395, height=500)
-
         # Alterando as cores de fundo
-        fig.update_layout(paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
+        fig.update_layout(autosize=True, paper_bgcolor='#f5f2f2', plot_bgcolor='#f5f2f2')
 
         # Exibe o gráfico no Streamlit
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
     # marcador azul
     colored_header(
