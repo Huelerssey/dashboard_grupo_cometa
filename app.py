@@ -222,7 +222,7 @@ else:
         colu1.plotly_chart(fig, use_container_width=True)
 
         # Questão 4: Distribuição de Clientes
-        colu2.subheader("Distribuição de Clientes: Novos, Perdidos e Recorrentes")
+        colu2.subheader("Distribuição de Clientes")
 
         # Criando um DataFrame para o gráfico de pizza
         status_df = status_clientes.reset_index()
