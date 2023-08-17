@@ -1,11 +1,9 @@
 import pandas as pd
 import streamlit as st
-import time
 from streamlit_extras.colored_header import colored_header
 from streamlit_extras.metric_cards import style_metric_cards
 import plotly.express as px
 from datetime import timedelta
-from streamlit_extras.streaming_write import write
 
 
 ## CONFIGURAÇÕES DA PAGINA ##
@@ -253,6 +251,17 @@ else:
 
         # Exibe o gráfico no Streamlit
         st.plotly_chart(fig, use_container_width=True)
+    
+    with st.container():
+        
+        # cria 3 colunas
+        colum1, colum2, colum3 = st.columns([2,1,2])
+
+        #coluna do meio
+        if colum2.button("✨ Insights & Recomendações ✨"):
+            st.write("1️⃣ - **Estratégias de Boas-Vindas para Novos Clientes:** Ao adquirir novos clientes nos últimos 6 meses, a empresa tem uma oportunidade única de estabelecer uma relação forte desde o início. Criar pacotes de boas-vindas ou oferecer descontos especiais nas primeiras compras pode encorajar esses novos clientes a tornarem-se compradores recorrentes, aumentando assim sua lealdade à marca.")
+            st.write("2️⃣ - **Reengajamento de Clientes Existentes:** Com um tempo médio de 377 dias entre compras, é vital para a empresa encontrar maneiras de manter os clientes envolvidos e incentivá-los a comprar mais frequentemente. Isso pode ser alcançado por meio de campanhas de marketing direcionadas, ofertas sazonais ou programas de fidelidade que recompensem compras recorrentes.")
+            st.write("3️⃣ - **Personalização com Base no Ranking de Clientes:** A análise do ranking de clientes por faturamento, compras e tempo entre compras oferece uma rica fonte de insights. Utilizando esses dados, a empresa pode criar experiências personalizadas, oferecendo produtos, serviços ou recompensas que se alinham às preferências e necessidades individuais de cada cliente. Isso não apenas aumentará a satisfação do cliente, mas também poderá levar a um aumento no faturamento total.")
 
     # marcador azul
     colored_header(
@@ -263,6 +272,9 @@ else:
 
 # #footer
 with st.container():
+
+    # cria 3 colunas
     col1, col2, col3 = st.columns([2,1,2])
     
+    # coluna do meio
     col2.write("Developed By: [@Huelerssey](https://huelerssey-portfolio.website)")
